@@ -13,8 +13,9 @@
  * the readme will list any important changes.
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 7.0.1
+ * @author  WooThemes
+ * @package WooCommerce/Templates
+ * @version 3.6.1
  */
 
 // Exit if accessed directly.
@@ -22,5 +23,5 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn btn-primary btn-lg btn-block">
-	<?php esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
+	<?php esc_html_e( 'Proceed to checkout', 'understrap' ); ?>
 </a>

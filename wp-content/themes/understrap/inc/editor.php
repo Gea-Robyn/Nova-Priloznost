@@ -1,8 +1,8 @@
 <?php
 /**
- * Understrap modify editor
+ * UnderStrap modify editor
  *
- * @package Understrap
+ * @package UnderStrap
  */
 
 // Exit if accessed directly.
@@ -47,67 +47,39 @@ if ( ! function_exists( 'understrap_tiny_mce_before_init' ) ) {
 
 		$style_formats = array(
 			array(
-				'title'    => __( 'Lead Paragraph', 'understrap' ),
+				'title'    => 'Lead Paragraph',
 				'selector' => 'p',
 				'classes'  => 'lead',
 				'wrapper'  => true,
 			),
 			array(
-				'title'  => _x( 'Small', 'Font size name', 'understrap' ),
+				'title'  => 'Small',
 				'inline' => 'small',
 			),
 			array(
-				'title'   => __( 'Blockquote', 'understrap' ),
+				'title'   => 'Blockquote',
 				'block'   => 'blockquote',
 				'classes' => 'blockquote',
 				'wrapper' => true,
 			),
 			array(
-				'title'   => __( 'Blockquote Footer', 'understrap' ),
+				'title'   => 'Blockquote Footer',
 				'block'   => 'footer',
 				'classes' => 'blockquote-footer',
 				'wrapper' => true,
 			),
 			array(
-				'title'  => __( 'Cite', 'understrap' ),
+				'title'  => 'Cite',
 				'inline' => 'cite',
 			),
 		);
 
 		if ( isset( $settings['style_formats'] ) ) {
 			$orig_style_formats = json_decode( $settings['style_formats'], true );
-			if ( is_array( $orig_style_formats ) ) {
-				$style_formats = array_merge( $orig_style_formats, $style_formats );
-			}
+			$style_formats      = array_merge( $orig_style_formats, $style_formats );
 		}
 
 		$settings['style_formats'] = wp_json_encode( $style_formats );
 		return $settings;
-	}
-}
-
-add_filter( 'mce_buttons', 'understrap_tiny_mce_blockquote_button' );
-
-if ( ! function_exists( 'understrap_tiny_mce_blockquote_button' ) ) {
-	/**
-	 * Removes the blockquote button from the TinyMCE toolbar.
-	 *
-	 * We provide the blockquote via the style formats. Using the style formats
-	 * blockquote receives the proper Bootstrap classes.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @see understrap_tiny_mce_before_init()
-	 *
-	 * @param array $buttons TinyMCE buttons array.
-	 * @return array TinyMCE buttons array without the blockquote button.
-	 */
-	function understrap_tiny_mce_blockquote_button( $buttons ) {
-		foreach ( $buttons as $key => $button ) {
-			if ( 'blockquote' === $button ) {
-				unset( $buttons[ $key ] );
-			}
-		}
-		return $buttons;
 	}
 }

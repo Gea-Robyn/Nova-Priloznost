@@ -2,7 +2,7 @@
 /**
  * Single post partial template
  *
- * @package Understrap
+ * @package UnderStrap
  */
 
 // Exit if accessed directly.
@@ -27,9 +27,15 @@ defined( 'ABSPATH' ) || exit;
 
 	<div class="entry-content">
 
+		<?php the_content(); ?>
+
 		<?php
-		the_content();
-		understrap_link_pages();
+		wp_link_pages(
+			array(
+				'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),
+				'after'  => '</div>',
+			)
+		);
 		?>
 
 	</div><!-- .entry-content -->
@@ -40,4 +46,4 @@ defined( 'ABSPATH' ) || exit;
 
 	</footer><!-- .entry-footer -->
 
-</article><!-- #post-<?php the_ID(); ?> -->
+</article><!-- #post-## -->

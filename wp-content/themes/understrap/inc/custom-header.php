@@ -2,7 +2,7 @@
 /**
  * Custom header setup
  *
- * @package Understrap
+ * @package UnderStrap
  */
 
 // Exit if accessed directly.
@@ -17,9 +17,9 @@ if ( ! function_exists( 'understrap_custom_header_setup' ) ) {
 	function understrap_custom_header_setup() {
 
 		/**
-		 * Filter Understrap custom-header support arguments.
+		 * Filter UnderStrap custom-header support arguments.
 		 *
-		 * @since Understrap 0.5.2
+		 * @since UnderStrap 0.5.2
 		 *
 		 * @param array $args {
 		 *     An array of custom-header support arguments.

@@ -2,15 +2,14 @@
 /**
  * Right sidebar check
  *
- * @package Understrap
+ * @package UnderStrap
  */
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
-
-// Closing the primary container from /global-templates/left-sidebar-check.php.
 ?>
-</div><!-- #primary -->
+
+</div><!-- #closing the primary container from /global-templates/left-sidebar-check.php -->
 
 <?php
 $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );

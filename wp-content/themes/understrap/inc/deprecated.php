@@ -2,31 +2,11 @@
 /**
  * Rest in peace
  *
- * @package Understrap
+ * @package UnderStrap
  */
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
-
-if ( ! function_exists( 'understrap_theme_slug_sanitize_select' ) ) {
-	/**
-	 * Sanitize select.
-	 *
-	 * @deprecated 1.2.0 Use understrap_customize_sanitize_select()
-	 * @see understrap_customize_sanitize_select()
-	 *
-	 * @since 0.6.11
-	 *
-	 * @param string               $input   Slug to sanitize.
-	 * @param WP_Customize_Setting $setting Setting instance.
-	 * @return string|bool Sanitized slug if it is a valid choice; the setting default for
-	 *                     invalid choices and false in all other cases.
-	 */
-	function understrap_theme_slug_sanitize_select( $input, $setting ) {
-		_deprecated_function( __FUNCTION__, '1.2.0', 'understrap_customize_sanitize_select' );
-		return understrap_customize_sanitize_select( $input, $setting );
-	}
-}
 
 if ( ! function_exists( 'understrap_adjust_body_class' ) ) {
 	/**
@@ -38,8 +18,15 @@ if ( ! function_exists( 'understrap_adjust_body_class' ) ) {
 	 * @link https://github.com/twbs/bootstrap/issues/20939
 	 */
 	function understrap_adjust_body_class( $classes ) {
-		_deprecated_function( 'understrap_adjust_body_class', '0.9.4' );
+
+		foreach ( $classes as $key => $value ) {
+			if ( 'tag' == $value ) {
+				unset( $classes[ $key ] );
+			}
+		}
+
 		return $classes;
+
 	}
 }
 
@@ -52,9 +39,6 @@ if ( ! function_exists( 'understrap_slbd_count_widgets' ) ) {
 	 * @deprecated 0.8.9
 	 */
 	function understrap_slbd_count_widgets( $sidebar_id ) {
-
-		_deprecated_function( 'understrap_slbd_count_widgets', '0.8.9', 'understrap_widget_classes' );
-
 		// If loading from front page, consult $_wp_sidebars_widgets rather than options
 		// to see if wp_convert_widget_settings() has made manipulations in memory.
 		global $_wp_sidebars_widgets;
