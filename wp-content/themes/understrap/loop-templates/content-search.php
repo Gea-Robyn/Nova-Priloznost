@@ -2,7 +2,7 @@
 /**
  * Search results partial template
  *
- * @package UnderStrap
+ * @package Understrap
  */
 
 // Exit if accessed directly.
@@ -44,4 +44,4 @@ defined( 'ABSPATH' ) || exit;
 
 	</footer><!-- .entry-footer -->
 
-</article><!-- #post-## -->
+</article><!-- #post-<?php the_ID(); ?> -->

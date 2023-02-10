@@ -4,7 +4,7 @@
  *
  * Learn more: https://codex.wordpress.org/Author_Templates
  *
- * @package UnderStrap
+ * @package Understrap
  */
 
 // Exit if accessed directly.
@@ -20,8 +20,10 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 		<div class="row">
 
-			<!-- Do the left sidebar check -->
-			<?php get_template_part( 'global-templates/left-sidebar-check' ); ?>
+			<?php
+			// Do the left sidebar check and open div#primary.
+			get_template_part( 'global-templates/left-sidebar-check' );
+			?>
 
 			<main class="site-main" id="main">
 
@@ -33,17 +35,20 @@ $container = get_theme_mod( 'understrap_container_type' );
 					} else {
 						$curauth = get_userdata( intval( $author ) );
 					}
-					?>
 
-					<h1><?php echo esc_html__( 'About:', 'understrap' ) . ' ' . esc_html( $curauth->nickname ); ?></h1>
+					the_archive_title( '<h1 class="page-title">', '</h1>' );
 
-					<?php
 					if ( ! empty( $curauth->ID ) ) {
-						echo get_avatar( $curauth->ID );
+						$alt = sprintf(
+							/* translators: %s: author name */
+							_x( 'Profile picture of %s', 'Avatar alt', 'understrap' ),
+							$curauth->display_name
+						);
+						echo get_avatar( $curauth->ID, 96, '', $alt );
 					}
-					?>
 
-					<?php if ( ! empty( $curauth->user_url ) || ! empty( $curauth->user_description ) ) : ?>
+					if ( ! empty( $curauth->user_url ) || ! empty( $curauth->user_description ) ) {
+						?>
 						<dl>
 							<?php if ( ! empty( $curauth->user_url ) ) : ?>
 								<dt><?php esc_html_e( 'Website', 'understrap' ); ?></dt>
@@ -53,47 +58,54 @@ $container = get_theme_mod( 'understrap_container_type' );
 							<?php endif; ?>
 
 							<?php if ( ! empty( $curauth->user_description ) ) : ?>
-								<dt><?php esc_html_e( 'Profile', 'understrap' ); ?></dt>
+								<dt>
+									<?php
+									printf(
+										/* translators: %s: author name */
+										esc_html__( 'About %s', 'understrap' ),
+										$curauth->display_name
+									);
+									?>
+								</dt>
 								<dd><?php echo esc_html( $curauth->user_description ); ?></dd>
 							<?php endif; ?>
 						</dl>
-					<?php endif; ?>
+						<?php
+					}
 
-					<h2><?php echo esc_html__( 'Posts by', 'understrap' ) . ' ' . esc_html( $curauth->nickname ); ?>:</h2>
-
-				</header><!-- .page-header -->
-					<!-- The Loop -->
-					<?php
 					if ( have_posts() ) {
-						echo '<ul>';
-						while ( have_posts() ) {
-							the_post();
-							echo '<li>';
-								printf(
-									'<a rel="bookmark" href="%1$s" title="%2$s %3$s">%3$s</a>',
-									esc_url( apply_filters( 'the_permalink', get_permalink( $post ), $post ) ),
-									esc_attr( __( 'Permanent Link:', 'understrap' ) ),
-									get_the_title()
-								);
-								understrap_posted_on();
-								esc_html_e( 'in', 'understrap' );
-								the_category( '&' );
-							echo '</li>';
-						}
-						echo '</ul>';
-					} else {
-						get_template_part( 'loop-templates/content', 'none' );
+						printf(
+							/* translators: %s: author name */
+							'<h2>' . esc_html__( 'Posts by %s', 'understrap' ) . '</h2>',
+							$curauth->display_name
+						);
 					}
 					?>
-					<!-- End Loop -->
 
-			</main><!-- #main -->
+				</header><!-- .page-header -->
 
-			<!-- The pagination component -->
-			<?php understrap_pagination(); ?>
+				<?php
+				// Start the loop.
+				if ( have_posts() ) {
+					while ( have_posts() ) {
+						the_post();
+						get_template_part( 'loop-templates/content', 'author' );
+					}
+				} else {
+					get_template_part( 'loop-templates/content', 'none' );
+				}
+				?>
 
-			<!-- Do the right sidebar check -->
-			<?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
+			</main>
+
+
+			<?php
+			// Display the pagination component.
+			understrap_pagination();
+
+			// Do the right sidebar check and close div#primary.
+			get_template_part( 'global-templates/right-sidebar-check' );
+			?>
 
 		</div> <!-- .row -->
 

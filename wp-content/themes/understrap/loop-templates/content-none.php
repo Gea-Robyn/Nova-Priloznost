@@ -2,9 +2,9 @@
 /**
  * The template part for displaying a message that posts cannot be found
  *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ * Learn more: https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package UnderStrap
+ * @package Understrap
  */
 
 // Exit if accessed directly.
