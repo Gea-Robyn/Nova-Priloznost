@@ -35,7 +35,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 
 ?>
-<div class="site" id="page">ddddd
+<div class="site" id="app">
 
 	<!-- ******************* The Navbar Area ******************* -->
 	<div id="wrapper-navbar">

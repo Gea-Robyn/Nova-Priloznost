@@ -14,17 +14,19 @@ defined('ABSPATH') || exit;
 
 // static HTML design goes here - its recommended to use get_header & get_footer functionality for header/footer
 get_header();
+?>
+<custom-element></custom-element>
 
+<?php
 get_footer();
 
-if ( WP_ENV != 'development' ) { 
+/* if ( WP_ENV != 'development' ) { 
 	// unstyled functionality code goes here  
 
   while (have_posts()) : the_post();
     the_content();
   endwhile;
-
-}
+} */
 
 
 ?>
