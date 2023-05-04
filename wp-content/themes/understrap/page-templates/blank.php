@@ -1,31 +1,32 @@
 <?php
+
 /**
- * Template Name: Blank Page Template
+ * Template Name: Text page
  *
- * Template for displaying a blank page.
+ * Template for displaying a page just with the header and footer area and a "naked" content area in between.
+ * Good for landingpages and other types of pages where you want to add a lot of custom markup.
  *
- * @package Understrap
+ * @package understrap
  */
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
+
+// static HTML design goes here - its recommended to use get_header & get_footer functionality for header/footer
+get_header();
 ?>
-<!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<?php wp_head(); ?>
-</head>
-<body>
-	<?php
-	while ( have_posts() ) {
-		the_post();
-		get_template_part( 'loop-templates/content', 'blank' );
-	}
-	wp_footer();
-	?>
-</body>
-</html>
+
+
+<?php
+get_footer();
+
+/* if ( WP_ENV != 'development' ) { 
+	// unstyled functionality code goes here  
+
+  while (have_posts()) : the_post();
+    the_content();
+  endwhile;
+} */
+
+
+?>

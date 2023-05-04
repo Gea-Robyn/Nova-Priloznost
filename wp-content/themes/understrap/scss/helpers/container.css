@@ -1,0 +1,26 @@
+@layer components {
+  .container-grid {
+    --gap: 1rem;
+    --max: calc((var(--container-max-width) - (var(--gap) * 11)) / 12);
+    display: grid;
+    grid-template-columns:
+      1fr
+      var(--padding-x)
+      repeat(5, [content-start] minmax(0, var(--max)) [content-gap] var(--gap))
+      [content-start] minmax(0, var(--max)) [content-gap] calc(var(--gap) / 2) [half] calc(var(--gap) / 2)
+      repeat(5, [content-start] minmax(0, var(--max)) [content-gap] var(--gap))
+      [content-start] minmax(0, var(--max))
+      [content-gap content-end]
+      var(--padding-x)
+      1fr;
+    grid-auto-rows: auto;
+    width: 100%;
+
+    @media (min-width: 768px) {
+      --gap: 1.5rem;
+    }
+    @media (min-width: 1024px) {
+      --gap: 2rem;
+    }
+  }
+}

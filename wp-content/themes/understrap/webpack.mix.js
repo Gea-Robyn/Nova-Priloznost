@@ -1,6 +1,8 @@
 const mix = require('laravel-mix')
 const LiveReloadWebpackPlugin = require('@kooneko/livereload-webpack-plugin')
 
+require('laravel-mix-tailwind');
+
 module.exports = {
   plugins: [
     new LiveReloadWebpackPlugin()
@@ -10,7 +12,8 @@ module.exports = {
 mix
   .js('js/main.js', 'js/dist/app.js')
   .vue()
-  .sass('scss/app.scss', 'css')
+  .postCss('scss/app.css', 'css/app.css')
+  .tailwind()
   .webpackConfig((webpack) => {
     return {
       plugins: [
@@ -18,7 +21,10 @@ mix
           __VUE_OPTIONS_API__: 'true',
           __VUE_PROD_DEVTOOLS__: 'false'
         })
-      ]
+      ],
+      stats: {
+        children: true,
+      },
     }
   })
 
